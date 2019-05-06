@@ -1,0 +1,293 @@
+<odoo>
+    <data>
+         
+<record id="student_register_kanban_view" model="ir.ui.view">
+        <field name="name">student.register.kanban</field>
+        <field name="model">student.register</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban class="o_hr_employee_kanban" default_group_by="gender">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="email"/>
+                <field name="contact"/>
+                <field name="gender"/>
+                <field name="qualification"/>
+                <templates>
+                    <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <field name="s_id"/>
+                        <div class="o_kanban_image">
+                            <img t-att-src="kanban_image('student.register','image', record.id.value)"/>
+                            <div class="o_employee_summary_icons">
+                                <t t-if="record.email.raw_value">
+                                    <span class='oe_kanban_mail_new' title='Unread Messages'><i class='fa fa-comments'/><t t-raw="record.contact.raw_value"/></span>
+                                </t>
+                                <span title='Messages'><i class='fa fa-comments'/><t t-esc="record.gender.raw_value.length"/></span>
+                                <span title='Followers'><i class='fa fa-users'/><t t-esc="record.qualification.raw_value.length"/></span>
+                            </div>
+                            
+                        </div>
+                        <div class="oe_kanban_details">
+                            <strong>
+                                <field name="name"/>
+                            </strong>
+                            <ul>
+                                <li id="student_info"/>
+                                <li t-if="record.s_id.raw_value"><field name="s_id"/></li>
+                                <li t-if="record.age.raw_value"><field name="age"/></li>
+                                <li t-if="record.email.raw_value"><i class="fa fa-envelope"></i> <field name="email"/></li>
+                                <li t-if="record.contact.raw_value">
+                                  <i class="fa fa-phone"></i> <field name="contact"/></li>
+
+
+                                <li t-if="record.gender.raw_value=='Male'">
+                                  <i class="fa fa-male">
+                                    
+                                  </i> 
+                                  <field name="gender"/>
+                                </li>
+                                <li t-elseif="record.gender.raw_value=='Female'">
+                                  <i class="fa fa-female"></i> 
+                                  <field name="gender"/></li>
+                            </ul>
+                           
+                        </div>
+                    </div>
+                    </t>
+                </templates>
+            </kanban>
+
+        </field>
+    </record>
+    <record id="open_module_tree_department" model="ir.actions.act_window">
+            <field name="name">Registrations</field>
+            <field name="res_model">student.register</field>
+            <field name="view_type">form</field>
+       
+             <field name="view_mode">tree,form,kanban</field>
+         
+    </record>
+   
+
+
+
+
+    <record  model='ir.ui.view' id="student_form">
+      <field name="name">Student Form</field>
+      <field name="model">student.register</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+               <button name="generate_record_name" string="Username" type="object"  class="oe_highlight" attrs="{'invisible':[('username','!=',False)]}"/>
+               <button name="generate_record_password" string="Password" type="object" class="oe_highlight" attrs="{'invisible':[('password','!=',False)]}"/>
+               <button name="send_email" string="Send Email" type="object" class="oe_highlight"/>
+               <button name="auto_generated" string="Student-Id" type="object" class="oe-highlight"/>
+                <button name="report_coupon" type="object" string="Genarate-Report"/>
+            </header>
+          <sheet>
+             <div class="oe_button_box" name="button_box">
+                <button name="instistute.daily_report_action" string="Report" type="action" 
+                                    class="oe_stat_button" icon="fa-archive">
+                            </button>
+                        </div>
+            
+
+           
+            <group>
+                <group>
+                    <field name="image" widget='image'/>
+                </group>
+                <group>
+                  <field name="s_id"/>
+                </group>
+                <group>
+                    <field name="name"/>
+                    <field name="age"/>
+                </group>
+              </group>
+              <group>
+
+                <group>
+                    <field name="date_of_birth"/>
+                    <field name="gender"/>
+                </group>   
+
+                <group>
+                    <field name="address"/>
+                    <field name="email"/>
+                    <field name="contact"/>
+                </group>
+              </group>
+              <group>
+
+                <group>
+                  <field name="qualification"/>
+                  
+                </group>
+              </group>
+             
+                      <group>
+                        <group>
+            
+            
+           
+                    <field name="username"/>
+                    <field name="password"/>
+                </group>
+              </group>
+              <notebook>
+                <page name="public" string="Description">
+                  <group>
+                    <field name="desc"/>
+                  </group>
+
+
+                </page>
+              </notebook>
+              
+            
+         
+
+     
+        </sheet>
+      </form>
+       
+        </field>
+    </record>
+    <!-- <record model="ir.actions.act_window" id="student_form_action">
+      <field name="name">Student window</field>
+      <field name="res_model">student.register</field>
+      <field name="view_model">tree,form,kanban</field>
+    </record> -->
+<record id="daily_report_tree" model="ir.ui.view">
+  <field name="name">Daily report tree</field>
+  <field name="model">report.report</field>
+  <field name="arch" type="xml">
+    <tree>
+          <field name="employee_name"/>
+          <field name="Manager_name"/>
+          <field name="task_date"/>
+
+        </tree>
+      </field>
+</record>
+
+<record  model="ir.ui.view" id="daily_report_form">
+  <field name="name">Daily report Form11111</field>
+  <field name="model">report.report</field>
+  <field name="arch" type="xml">
+    <form>
+      <sheet>
+
+      <group>
+        <group>
+          <field name="employee_name"/>
+          <field name="Manager_name"/>
+
+        </group>
+        <group>
+          <field name="task_date"/>
+        </group>
+      </group>
+      <notebook>
+        <page string="Task Details">
+        
+
+
+          <!-- <field name="tasks" attrs="{'invisible':[('many2onefield,'='value]}"/> -->
+          <separator string="Report"/>
+            <field name="tasks" >
+              <tree editable="bottom">
+              <field name="task_no"/>
+              <field name="task_description"/>
+              <field name="started_date"/>
+              <field name="finished_date"/>
+              <field name="status"/>
+            </tree>
+            </field>
+         
+
+        </page>
+      </notebook>
+    </sheet>
+    </form>
+
+
+  </field>
+</record>
+
+<record id="daily_report_action" model="ir.actions.act_window">
+  <field name="name">Daily Report Action</field>
+  <field name="res_model">report.report</field>
+  <field name="view_mode">tree,form</field>
+
+  </record>
+
+
+
+
+  <report 
+        id="report_advance" 
+        model="student.register" 
+        string="Student Registration-Report"
+        report_type="qweb-pdf"
+        name="instistute.employee_report_advance" 
+        file="instistute.employee_report_advance"
+        attachment_use="True"
+      />
+      <!-- <report 
+        id="student_advance" 
+        model="student.list" 
+        string="Student Report"
+        report_type="qweb-pdf"
+        name="instistute.student_layout_report" 
+        file="instistute.student_layout_report"
+      />
+    <record id="student_view_form" model="ir.ui.view">
+      <field name="name">student form</field>
+      <field name="model">student.list</field>
+      <field name="arch" type="xml">
+        <form string="Employee-List">
+          <group>
+            <field name="stu_id"/>
+
+            </group>
+            <footer>
+              <button  name="student_reports" string="Employee-List" type="object"/>
+                <button name="Cancel" special="cancel" string="discard"/>
+            </footer>
+
+        </form>
+      </field>
+    </record>
+
+
+    <record id="student_list_details" model="ir.actions.act_window">
+        <field name="name">student_list_action</field>
+        <field name="res_model">student.list</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <menuitem name="Instistute" id="instistute_menu"/>
+    <menuitem name="Instistute-list" id="instistute.menu_1" parent="instistute_menu" action="open_module_tree_department"/>
+      <!-- <menuitem name="student_list" id="instistute.menu_2" parent="instistute_menu" action="student_list_details"/> -->
+    <!-- <menuitem name="Daily_Report" id="instistute.menu_2" parent="instistute_menu" action="daily_report_action"/> -->
+    <!-- <menuitem name="demoo1" id="menu1" action="student_kanban_view" parent="instistute_menu"/> -->
+      
+
+    </data>
+</odoo>

@@ -1,0 +1,183 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="employee.list">
+      <field name="name">Employee list</field>
+      <field name="model">employee.employee</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+
+
+    <record model="ir.ui.view" id="employee_list">
+        <field name="name">Employee List</field>
+        <field name="model">employee.employee</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="name"/>
+            <field name="emp_Id"/>
+            <field name="date_of_birth"/>
+            <field name="age"/>
+            <field name="active"/>
+            <field name="join_date"/>
+
+            <field name="gender"/>
+            <field name="department"/>
+          </tree>
+        </field>
+    </record>
+
+
+<record model="ir.ui.view" id="Employee_form">
+<field name="name">Employee form</field>
+<field name="model">employee.employee</field>
+<field name="arch" type="xml">
+  <form>
+    <header>
+      <button name="generateEmpId" type="object"
+          string="Generateid" attrs="{'invisible':[('emp_Id','!=',0)]}"/>
+    </header>
+    
+    <sheet>
+    
+      <group>
+        <group>
+          
+          <field name="name" placeholder="Name" />
+      
+            <field name="emp_Id"/>
+            <field name="age"/>
+            
+        </group>
+        <group>
+           <field name="date_of_birth"/>
+          <field name="join_date"/>
+            <field name="gender"/>
+            <field name="department" widget="selection"/>
+
+        </group>
+        <group>
+          <field name="active"/>
+          <field name="image"/>
+        </group>
+      </group>
+    </sheet>
+    <notebook>
+      <page name="public" string="Public Information">
+      <group>
+          <button name="calculate_salry" string="Calculate-Salary" type="object" colspan="2"/>
+        <group string="Personal Information">
+            <field name="basic_salary"/>
+           <field name="total_salary"/>
+
+        </group>
+      </group>
+      </page>
+      <page name="public" string="BankDetails">
+
+      </page>
+    
+
+    </notebook>
+
+    
+  </form>
+</field>
+</record>
+
+<record model="ir.actions.act_window" id="employee_action_form">
+  <field name="name">Employee Window</field>
+  <field name="res_model">employee.employee</field>
+  <field name="view_mode">tree,form</field>
+</record>
+
+
+<record model="ir.ui.view" id="department_details">
+  <field name="name">Department Details</field>
+  <field name="model">department.department</field>
+  <field name="arch" type="xml">
+    <form>
+    <header>
+      <button name="Departments_id" type="object"
+          string="Generateid" attrs="{'invisible':[('dep_id','!=',0)]}"/>
+    </header>
+    <sheet>
+      
+      <group>
+        <group>
+          <field name="dep_id"/>
+          <field name="name"/>
+
+        </group>
+      </group>
+    </sheet>
+  
+      
+    </form>
+  </field>
+</record>
+
+
+
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="employee.action_window">
+      <field name="name">Employee window</field>
+      <field name="res_model">employee.employee</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="employee.action_server">
+      <field name="name">Employee server</field>
+      <field name="model_id" ref="model_employee_employee"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="Employee" id="employee.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="employee.menu_1" parent="employee.menu_root"/>
+    <menuitem name="Menu 2" id="employee.menu_2" parent="employee.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="employee.menu_1_list" parent="employee.menu_1"
+              action="employee.action_window"/>
+    <menuitem name="Server to list" id="employee" parent="employee.menu_2"
+              action="employee.action_server"/>
+    -->
+      <!-- this is for main menu of this module this will be display in  the top of the module -->
+    <menuitem name="Employee" id="employee_menu_root"/>
+
+    <menuitem name="List" id="employee_menu1_list" parent="employee_menu_root" action="employee_action_form"/>
+
+
+
+
+
+
+
+  </data>
+</odoo>

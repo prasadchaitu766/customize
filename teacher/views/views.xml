@@ -1,0 +1,135 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <record model="ir.ui.view" id="student_list">
+      <field name="name">student list</field>
+      <field name="model">student.student</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="email"/>
+          <field name="contact"/>
+          <field name="dob"/>
+          <field name="reg_date"/>
+          <field name="image"/>
+          <field name="gender"/>
+          <field name="course_id"/>
+          <field name="hobby_id"/>
+          <field name="qualification"/>
+          <field name="age"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="student_form">
+      <field name="name">Student form</field>
+      <field name="model">student.student</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <group>
+              <field name="name"/>
+          <field name="email"/>
+          <field name="contact"/>
+        </group>
+        <group>
+          <field name="dob"/>
+          <field name="reg_date"/>
+          <field name="image"/>
+        </group>
+        <group>
+          <field name="gender"/>
+          <field name="course_id"/>
+          <field name="hobby_id"/>
+        </group>
+        <group>
+          <field name="qualification"/>
+          <field name="age"/>
+        </group>
+      </group>
+    </form>
+  </field>
+</record>
+<!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="teacher_action_window">
+      <field name="name">Teacher</field>
+      <field name="res_model">student.student</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+<!-- for teacher -->
+<record model="ir.ui.view" id="teacher_transfer_list">
+      <field name="name">teacherTransfer</field>
+      <field name="model">teacher.teacher</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="teacher"/>
+          <field name="reg_date"/>
+          <field name="message"/>
+        </tree>
+
+      </field>
+    </record>
+
+    <!-- <record model="ir.ui.view" id="teacher_form">
+      <field name="name">Teacher form</field>
+      <field name="model">student.teacher</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <group>
+              <field name="teacher"/>
+          <field name="reg_date"/>
+          <field name="message"/>
+            </group>
+          </group>
+
+        </form>
+      </field>
+    </record> -->
+
+    <record model="ir.actions.act_window" id="teacher_transfer_window">
+      <field name="name">Transfer</field>
+      <field name="res_model">teacher.teacher</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+
+
+
+
+    
+
+    
+    
+
+    
+    
+    
+
+    <!-- Top menu item -->
+    
+    <menuitem name="Teacher" id="teacher.menu_root"/>
+    
+    <!-- menu categories -->
+    
+    <menuitem name="Teacher" id="teacher.menu_1" parent="teacher.menu_root"/>
+    <menuitem name="Teacher Transfer" id="teacher.menu_2" parent="teacher.menu_1" action="teacher_transfer_window"/>
+     <menuitem name="DemoForms" id="teacher.menu_3" parent="teacher.menu_1"/>
+    
+    <!-- actions -->
+    
+    <menuitem name="Teacher" id="teacher.menu_1_list" parent="teacher.menu_1"
+              action="teacher_action_window"/>
+             
+    
+  </data>
+</odoo>
