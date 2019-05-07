@@ -64,6 +64,7 @@ class StudentRegistaration(models.Model):
 })		
 		self.password=g["password"]
 
+	@api.multi
 	def send_email(self):
 		template = self.env.ref('instistute.send_email_process')
 
@@ -146,8 +147,13 @@ class Tasks(models.Model):
     status =fields.Char(string="Task Status") 
     report=fields.Many2one('report.report')
 
+class student_extra_elemnet(models.Model):
+    _inherit="student.register"
 
-
+    blood_group = fields.Selection(
+        [('A+', 'A+ve'), ('B+', 'B+ve'), ('O+', 'O+ve'), ('AB+', 'AB+ve'),
+         ('A-', 'A-ve'), ('B-', 'B-ve'), ('O-', 'O-ve'), ('AB-', 'AB-ve')],
+        string='Blood Group')
 
 
 

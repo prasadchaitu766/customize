@@ -163,6 +163,7 @@
 <record id="daily_report_tree" model="ir.ui.view">
   <field name="name">Daily report tree</field>
   <field name="model">report.report</field>
+  
   <field name="arch" type="xml">
     <tree>
           <field name="employee_name"/>
@@ -176,6 +177,7 @@
 <record  model="ir.ui.view" id="daily_report_form">
   <field name="name">Daily report Form11111</field>
   <field name="model">report.report</field>
+
   <field name="arch" type="xml">
     <form>
       <sheet>

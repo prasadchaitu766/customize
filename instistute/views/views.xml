@@ -10,15 +10,36 @@
 	 	<field name="auto_delete" eval="True"/>
 	 	<field name="body_html">
 	 			   <![CDATA[
-	          <p>Dear ${(object.name)},<br/><br/>
+	          <p>Dear <br/><br/>
 		  Good job, you've just created your first e-mail template!<br/></p>
                   Regards,<br/>
-                  ${(object.company_id.name)}
+                  
 	    ]]>
             
 
+
 	 	</field>
 	</record>
+
+
+
+  <record id="student_inherited_id" model="ir.ui.view">
+      <field name="name">student_form_inherit_view</field>
+      <field name="model">student.register</field>
+      <field name="inherit_id" ref="instistute.student_form"/>
+        <field name="arch" type="xml">
+          <field name="gender" position="after">
+          <field name="blood_group"/>
+        </field>
+       <!--  <xpath expr="/form/sheet/field[@name='gender']" position="after">
+            <field name="blood_group"/>
+        </xpath>
+ -->
+    </field>
+</record>
+
+
+
 	<record id="seq_test" model="ir.sequence">
 		<field name="name">Test</field>
     	<field name="code">test_seq_id</field>

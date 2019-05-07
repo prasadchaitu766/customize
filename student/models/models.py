@@ -54,6 +54,5 @@ class StudentRecord(models.Model):
     nationality = fields.Many2one('res.country', string='Nationality')
     State = fields.Many2one('res.users',string="User")
     
-	
 
-	
+
