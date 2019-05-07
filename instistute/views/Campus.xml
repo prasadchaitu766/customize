@@ -1,0 +1,62 @@
+<odoo>
+	<data>
+		<record id="student_campus_tree" model="ir.ui.view">
+			<field name="name">Student-Campus-Tree</field>
+			<field name="model">student.campus</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="code"/>
+					<field name="email"/>
+					<field name="contact"/>
+
+				</tree>
+
+
+			</field>
+		</record>
+		<record id="student_campus_form" model="ir.ui.view">
+			<field name="name">Student-campus-Form</field>
+			<field name="model">student.campus</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name"/>
+								<field name="code"/>
+
+							</group>
+							<group>
+								<field name="address"/>
+								<field name="contact"/>
+								<field name="email"/>
+							</group>
+						</group>
+
+					</sheet>
+					</form>
+
+			</field>
+
+		</record>
+
+		<record id="student_campus_action" model="ir.actions.act_window">
+		  <field name="name">Campus</field>
+		  <field name="res_model">student.campus</field>
+		  <field name="view_mode">tree,form</field>
+		</record>
+
+
+
+		<!-- <record id="student_leave_action111111" model="ir.actions.act_windoow">
+			<field name="name">Student-Leave-Action</field>
+			<field name="res_model">student.leave</field>
+			  <field name="view_mode">tree,form</field>
+
+		</record> -->
+
+
+		 <menuitem name="Campus" id="instistute.menu_4" parent="instistute_menu" action="student_campus_action"/>
+	</data>
+</odoo>

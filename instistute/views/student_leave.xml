@@ -1,0 +1,56 @@
+<odoo>
+	<data>
+		<record id="student_leave_tree" model="ir.ui.view">
+			<field name="name">Student-Leave-tree</field>
+			<field name="model">student.leave</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="student"/>
+				</tree>
+
+
+			</field>
+		</record>
+		<record id="student_leave_form" model="ir.ui.view">
+			<field name="name">Student-Leave-Form</field>
+			<field name="model">student.leave</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="student" options="{'no_create':True}"/>
+								<field name="campus" options="{'no_create':True}"/>
+								<field name="address"/>
+								<field name="start_date"/>
+								<field name="ending_date"/>
+								<field name="desc"/>
+							</group>
+						</group>
+
+					</sheet>
+					</form>
+
+			</field>
+
+		</record>
+
+		<record id="student_leave_action" model="ir.actions.act_window">
+		  <field name="name">Leave</field>
+		  <field name="res_model">student.leave</field>
+		  <field name="view_mode">tree,form</field>
+		</record>
+
+
+
+		<!-- <record id="student_leave_action111111" model="ir.actions.act_windoow">
+			<field name="name">Student-Leave-Action</field>
+			<field name="res_model">student.leave</field>
+			  <field name="view_mode">tree,form</field>
+
+		</record> -->
+
+
+		 <menuitem name="Student-LeaveRequest" id="instistute.menu_3" parent="instistute_menu" action="student_leave_action"/>
+	</data>
+</odoo>

@@ -21,13 +21,14 @@ class StudentRegistaration(models.Model):
 	# _inherit=['mail.thread']
 
 	s_id  = fields.Char(string="Student_Id",readonly=True)
-	name = fields.Char(string="StudentName") 
+	name = fields.Char(string="Student Name") 
 	age = fields.Integer(string="Age",help="enter age")
 	date_of_birth = fields.Date(string="Date-Of-Birth")
 	gender = fields.Selection([("male","Male"),("female","Female"),("others","Others")],string="Gender")
 	address =fields.Text(string="Address")
 	image = fields.Binary()
 	email = fields.Char(string="Email",required=True)
+	campus= fields.Many2one("student.campus",string="Campus")
 	contact = fields.Char(string="Contact")
 	qualification = fields.Many2one("qualification.qualification",string="Qualification")
 	username = fields.Char(string="Username")
@@ -131,7 +132,7 @@ class qualification(models.Model):
 class Daily_report(models.Model):
     _name='report.report'
     
-    employee_name=fields.Char(string="Employee-Name")
+    name=fields.Char(string="Employee-Name")
     Manager_name=fields.Char(string="Manager_name")
     task_date = fields.Datetime(string="Task-date")
     tasks = fields.One2many('task.task','report',string="Tasks")
@@ -154,6 +155,27 @@ class student_extra_elemnet(models.Model):
         [('A+', 'A+ve'), ('B+', 'B+ve'), ('O+', 'O+ve'), ('AB+', 'AB+ve'),
          ('A-', 'A-ve'), ('B-', 'B-ve'), ('O-', 'O-ve'), ('AB-', 'AB-ve')],
         string='Blood Group')
+# class student_inherited_view(models.Model):
+# 	_inherit ="report.report"
+
+# 	@api.multi
+# 	def student_records(self):
+# 		return{
+# 		  'type':'ir.actions.act_windoow',
+# 		  'name':'Student Records',
+# 		  'view_mode':'tree,form',
+# 		  'res_model':'report.report',
+# 		  'domain':[('name','=',self.name)]
+# 		}
+class campus(models.Model):
+	_name="student.campus"
+
+	name=fields.Char(string="Campus-Name",required=True)
+	code = fields.Char(string="Campus-Code")
+	address = fields.Text(string="Address")
+	contact = fields.Char(string="Contact")
+	email = fields.Char(string="Email")
+
 
 
 

@@ -25,6 +25,8 @@
 
   <record id="student_inherited_id" model="ir.ui.view">
       <field name="name">student_form_inherit_view</field>
+
+      
       <field name="model">student.register</field>
       <field name="inherit_id" ref="instistute.student_form"/>
         <field name="arch" type="xml">

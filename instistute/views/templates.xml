@@ -86,11 +86,11 @@
                 <button name="report_coupon" type="object" string="Genarate-Report"/>
             </header>
           <sheet>
-             <div class="oe_button_box" name="button_box">
-                <button name="instistute.daily_report_action" string="Report" type="action" 
+             <!-- <div class="oe_button_box" name="button_box">
+                <button name="student_inherited_view" string="Report" type="object" 
                                     class="oe_stat_button" icon="fa-archive">
                             </button>
-                        </div>
+                        </div> -->
             
 
            
@@ -111,6 +111,7 @@
                 <group>
                     <field name="date_of_birth"/>
                     <field name="gender"/>
+                    <field name="campus"/>
                 </group>   
 
                 <group>
@@ -160,19 +161,19 @@
       <field name="res_model">student.register</field>
       <field name="view_model">tree,form,kanban</field>
     </record> -->
-<record id="daily_report_tree" model="ir.ui.view">
+<!-- <record id="daily_report_tree" model="ir.ui.view">
   <field name="name">Daily report tree</field>
   <field name="model">report.report</field>
   
   <field name="arch" type="xml">
     <tree>
-          <field name="employee_name"/>
+          <field name="name"/>
           <field name="Manager_name"/>
           <field name="task_date"/>
 
         </tree>
       </field>
-</record>
+</record> -->
 
 <record  model="ir.ui.view" id="daily_report_form">
   <field name="name">Daily report Form11111</field>
@@ -184,7 +185,7 @@
 
       <group>
         <group>
-          <field name="employee_name"/>
+          <field name="name"/>
           <field name="Manager_name"/>
 
         </group>
@@ -285,9 +286,10 @@
 
 
     <menuitem name="Instistute" id="instistute_menu"/>
-    <menuitem name="Instistute-list" id="instistute.menu_1" parent="instistute_menu" action="open_module_tree_department"/>
+    <menuitem name="Students-list" id="instistute.menu_1" parent="instistute_menu" action="open_module_tree_department"/>
       <!-- <menuitem name="student_list" id="instistute.menu_2" parent="instistute_menu" action="student_list_details"/> -->
-    <!-- <menuitem name="Daily_Report" id="instistute.menu_2" parent="instistute_menu" action="daily_report_action"/> -->
+    <menuitem name="Daily_Report" id="instistute.menu_2" parent="instistute_menu" action="daily_report_action"/>
+    <!--  <menuitem name="Student-LeaveRequest" id="instistute.menu_3" parent="instistute_menu" action="instistute.student_leave_action"/> -->
     <!-- <menuitem name="demoo1" id="menu1" action="student_kanban_view" parent="instistute_menu"/> -->
       
 
