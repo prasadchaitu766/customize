@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
+from odoo.exceptions import UserError,ValidationError
+import re
+
 
 
 
@@ -31,9 +34,40 @@ class StudentRegistaration(models.Model):
 	campus= fields.Many2one("student.campus",string="Campus")
 	contact = fields.Char(string="Contact")
 	qualification = fields.Many2one("qualification.qualification",string="Qualification")
+
 	username = fields.Char(string="Username")
 	password = fields.Char(string="Password")
 	desc = fields.Html(string="Description")
+
+	@api.constrains('age')
+	def checking_age(self):
+		for x in self:
+			if x.age>=30 :
+				raise UserError(_("Your  age not match please change your date of birth your age must be below 30"))
+			elif x.age<=15:
+				raise UserError(_("Your age must be more than 15 Years"))
+
+	@api.constrains('email')
+	def email_validating(self):
+		for y in self:
+			if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", y.email) == None:
+				raise ValidationError("Please Provide valid Email Address: %s" % y.email)
+
+			else:
+				raise UserError(_("Your email is not correct"))
+
+
+
+
+ #    @api.constrains('contact')
+	# def contact_validaion(self):
+	# 	for z in self:
+	# 		if count(z.contact)!=10:
+	# 			raise UserError(_("Mobile number must be 10 digits"))
+	# 		elif re.compile("(0/91)?[7-9][0-9]{9}"):
+	# 			raise UserError(_("please enter valid contact number"))
+
+
  	
 
 	@api.onchange('date_of_birth')

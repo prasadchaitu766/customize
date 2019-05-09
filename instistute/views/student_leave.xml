@@ -6,6 +6,10 @@
 			<field name="arch" type="xml">
 				<tree>
 					<field name="student"/>
+					<field name="campus"/>
+					<field name="address"/>
+					<field name="desc"/>
+					<field name="state"/>
 				</tree>
 
 
@@ -16,14 +20,29 @@
 			<field name="model">student.leave</field>
 			<field name="arch" type="xml">
 				<form>
+					<header>
+						<button name="request" type="object" string="Request" states="draft"/>
+						<button name="to_approve" type="object" string="Approve" states="request"/>
+						<button name="to_reject" type="object" string="Reject" states="request"/>
+						<field name="state" readonly="1" statusbar_visible="draft,rejected,approved,request" widget="statusbar"/>
+					</header>
 					<sheet>
 						<group>
 							<group>
-								<field name="student" options="{'no_create':True}"/>
+								<!-- <field name="student" options="{'no_create':True}"/> -->
+								<field name="student" widget="selection"/>
 								<field name="campus" options="{'no_create':True}"/>
+							</group>
+							<group>
 								<field name="address"/>
+								<field name="approve_date"/>
+							</group>
+							<group>
+								<!-- <field name="date" options="{'datepicker':{'yearRange': 'c-100:c+0'}}"/> -->
 								<field name="start_date"/>
 								<field name="ending_date"/>
+							</group>
+							<group>
 								<field name="desc"/>
 							</group>
 						</group>
@@ -41,16 +60,53 @@
 		  <field name="view_mode">tree,form</field>
 		</record>
 
+		<record id="student_result_tree" model="ir.ui.view">
+			<field name="name">Result</field>
+			<field name="model">student.result</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="student_name"/>
+					<field name="total"/>
+					<field name="percentage"/>
+					<field name="grade"/>
 
+				</tree>
+			</field>
+		</record>
+		<record id="student_result_form" model="ir.ui.view">
+			<field name="name">Result-Form</field>
+			<field name="model">student.result</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="student_name"/>
 
-		<!-- <record id="student_leave_action111111" model="ir.actions.act_windoow">
-			<field name="name">Student-Leave-Action</field>
-			<field name="res_model">student.leave</field>
-			  <field name="view_mode">tree,form</field>
+							</group>
+							<group>
+								<field name="subject1"/>
+								<field name="subject2"/>
 
-		</record> -->
-
+							</group>
+							<group>
+								<field name='total'/>
+								<field name="percentage"/>
+								<field name="grade"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="student_result_action" model="ir.actions.act_window">
+				<field name="name">Result-Action</field>
+				<field name="res_model">student.result</field>
+				<field name="view_mode">tree,form</field>
+		</record>
 
 		 <menuitem name="Student-LeaveRequest" id="instistute.menu_3" parent="instistute_menu" action="student_leave_action"/>
+		 <menuitem name="Student-Result" id="instistute.menu4" parent="instistute_menu" action="student_result_action"/>
 	</data>
 </odoo>
